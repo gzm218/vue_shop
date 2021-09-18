@@ -70,11 +70,11 @@ export default {
     },
     // 登陆前的预验证
     login() {
+      // 返回的Promise 用async await
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
         const { data: res } = await this.$http.post('login', this.loginForm)
-        // 返回的Promise 用async await
-        console.log(res)
+        // console.log(res)
         if (res.meta.status !== 200) return this.$message.error('登陆失败')
         this.$message.success('登陆成功')
         // 要保持一个登陆状态  成功之后的token 保存到客户端的sessionStorage中
