@@ -25,6 +25,7 @@
           :collapse-transition="false"
           router
           :default-active="activePath"
+          unique-opened
         >
           <!-- 一级菜单  用户管理-->
           <el-submenu
