@@ -381,7 +381,7 @@ export default {
     // 根据id删除对应信息
     async removeUserById(id) {
       const confirmResult = await this.$confirm(
-        '此操作将永久删除该文件, 是否继续?',
+        '此操作将永久删除该用户, 是否继续?',
         '提示',
         {
           type: 'warning',
