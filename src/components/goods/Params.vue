@@ -321,7 +321,6 @@ export default {
         item.inputVisible = false
         item.inputValue = ''
       })
-      console.log(res.data)
       if (this.activeName === 'many') {
         this.manyParamsDate = res.data
       } else {
@@ -330,9 +329,6 @@ export default {
     },
     // 添加动态静态参数
     addParmas() {
-      console.log(this.addForm)
-      console.log(this.selectedCateKeys)
-      console.log(this.activeName)
       this.$refs.addFormRef.validate(async valid => {
         if (!valid) return
         const { data: res } = await this.$http.post(

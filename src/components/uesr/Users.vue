@@ -318,7 +318,7 @@ export default {
         userinfo.mg_state = !userinfo.mg_state
         return this.$message.error('更新用户状态失败')
       }
-      this.$message.success('跟新状态成功')
+      this.$message.success('更新状态成功')
     },
     // 监听添加用户对话框的关闭时间
     addDialogClosed() {
