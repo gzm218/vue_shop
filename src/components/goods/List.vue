@@ -122,6 +122,7 @@
       title="修改商品数据"
       :visible.sync="editDialogVisible"
       width="50%"
+      @close="editDialogClosed"
     >
       <!-- 内容主题 -->
       <el-form
@@ -135,37 +136,19 @@
           <el-input v-model="editForm.goods_name"></el-input>
         </el-form-item>
         <el-form-item label="商品价格" prop="goods_price">
-          <el-input v-model="editForm.goods_price"></el-input>
+          <el-input v-model="editForm.goods_price" type="number"></el-input>
         </el-form-item>
         <el-form-item label="商品数量" prop="goods_number">
-          <el-input v-model="editForm.goods_number"></el-input>
+          <el-input v-model="editForm.goods_number" type="number"></el-input>
         </el-form-item>
         <el-form-item label="商品重量" prop="goods_weight">
-          <el-input v-model="editForm.goods_weight"></el-input>
+          <el-input v-model="editForm.goods_weight" type="number"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="商品介绍" prop="goods_introduce">
+        <!-- <el-form-item label="商品介绍">
           <el-input v-model="editForm.goods_introduce"></el-input>
         </el-form-item>
-        <el-form-item label="商品图片" prop="pics"> -->
-        <!-- <el-upload
-            class="upload-demo"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :before-remove="beforeRemove"
-            multiple
-            :limit="3"
-            :on-exceed="handleExceed"
-            :file-list="fileList"
-          >
-            <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">
-              只能上传jpg/png文件，且不超过500kb
-            </div>
-          </el-upload> -->
-        <!-- </el-form-item> -->
-        <!-- <el-form-item label="商品参数" prop="attrs">
-          <el-input v-model="editForm.attrs"></el-input>
+        <el-form-item label="商品图片">
+          <img :src="this.editForm.pics" alt="" />
         </el-form-item> -->
       </el-form>
       <!-- 底部区 -->
@@ -200,47 +183,18 @@ export default {
       //
       FormRules: {
         goods_name: [
-          { required: true, message: '请输入商品名称', trigger: 'blur' },
-          { min: 1, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          { required: true, message: '请输入商品名称', trigger: 'blur' }
         ],
         goods_price: [
-          { required: true, message: '请输入商品价格', trigger: 'blur' },
-          { min: 1, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          { required: true, message: '请输入商品价格', trigger: 'blur' }
         ],
         goods_number: [
-          { required: true, message: '请输入商品数量', trigger: 'blur' },
-          { min: 1, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          { required: true, message: '请输入商品数量', trigger: 'blur' }
         ],
         goods_weight: [
-          { required: true, message: '请输入商品重量', trigger: 'blur' },
-          { min: 1, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
-        ],
-        goods_introduce: [
-          { required: false, message: '请输入商品简介', trigger: 'blur' },
-          { min: 0, max: 50, message: '长度在 3 到 10 个字符', trigger: 'blur' }
-        ],
-        pics: [
-          { required: false, message: '请输入商品数量', trigger: 'blur' },
-          { min: 1, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
-        ],
-        attrs: [
-          { required: false, message: '请输入商品数量', trigger: 'blur' },
-          { min: 1, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          { required: true, message: '请输入商品重量', trigger: 'blur' }
         ]
       }
-      // 上传图片
-      // fileList: [
-      //   {
-      //     name: 'food.jpeg',
-      //     url:
-      //       'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-      //   },
-      //   {
-      //     name: 'food2.jpeg',
-      //     url:
-      //       'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-      //   }
-      // ],
     }
   },
   created() {
@@ -276,7 +230,6 @@ export default {
     // 提交添加商品信息
     addGoods() {
       this.addDialogVisible = false
-      console.log(this.addForm)
     },
     // 删除商品信息
     async removeGoodById(goodsId) {
@@ -315,10 +268,12 @@ export default {
         `goods/${this.editForm.goods_id}`,
         this.editForm
       )
-      console.log(res)
       if (res.meta.status !== 200) return this.$message.error('修改失败')
       this.getGoodList()
       this.editDialogVisible = false
+    },
+    editDialogClosed() {
+      this.$refs.editFormRef.resetFields()
     }
   }
 }
