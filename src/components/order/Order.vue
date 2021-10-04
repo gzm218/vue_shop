@@ -197,7 +197,6 @@ export default {
       const { data: res } = await this.$http.get('orders', {
         params: this.queryInfo
       })
-      console.log(res)
       if (res.meta.status !== 200) {
         return this.$Message.error('获取订单列表数据失败')
       }

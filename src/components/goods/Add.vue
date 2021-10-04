@@ -209,7 +209,6 @@ export default {
     },
     // 改变级联选择器触发
     handleChange() {
-      console.log(this.addForm.goods_cat)
       if (this.addForm.goods_cat.length !== 3) {
         this.addForm.goods_cat = []
       }
@@ -246,11 +245,9 @@ export default {
             params: { sel: 'only' }
           }
         )
-        console.log(res)
         if (res.meta.status !== 200) {
           return this.$message.error('获取商品静态属性失败')
         }
-        console.log(res.data)
         this.onlyTableData = res.data
       }
     },
@@ -304,7 +301,6 @@ export default {
         // 执行添加的逻辑
         // 商品的名称必须是唯一的
         const { data: res } = await this.$http.post('goods', form)
-        console.log(res)
         if (res.meta.status !== 201) {
           return this.$message.error('添加商品失败')
         }

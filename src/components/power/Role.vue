@@ -268,7 +268,6 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error('查询用户失败')
       }
-      console.log(res)
       this.editForm = res.data
       this.editDialogVisible = true
     },
@@ -338,7 +337,6 @@ export default {
       if (confirmResult !== 'confirm') {
         return this.$message.info('取消删除')
       }
-      console.log(role.id, rightId)
       const { data: res } = await this.$http.delete(
         `roles/${role.id}/rights/${rightId}`
       )
@@ -379,7 +377,6 @@ export default {
         ...this.$refs.treeRef.getCheckedKeys(),
         ...this.$refs.treeRef.getHalfCheckedKeys()
       ]
-      // console.log(keys)
       const idStr = keys.join(',')
       const { data: res } = await this.$http.post(
         `roles/${this.roleId}/rights`,

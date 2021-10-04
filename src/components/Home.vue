@@ -137,7 +137,7 @@ export default {
     }
   }
   img {
-    width: 7%;
+    width: 6%;
     border-radius: 50%;
   }
 }

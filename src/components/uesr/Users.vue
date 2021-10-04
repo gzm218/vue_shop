@@ -310,7 +310,6 @@ export default {
     },
     // 监听 状态改变 并到服务器中
     async userStateChanged(userinfo) {
-      console.log(userinfo)
       const { data: res } = await this.$http.put(
         `users/${userinfo.id}/state/${userinfo.mg_state}`
       )
@@ -365,8 +364,6 @@ export default {
             mobile: this.editForm.mobile
           }
         )
-        console.log(this.editForm)
-        console.log(res)
         if (res.meta.status !== 200) {
           return this.$message.error('修改失败')
         }
@@ -410,7 +407,6 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error('获取角色列表失败')
       }
-      console.log(res)
       this.$message.success('获取角色列表成功')
       this.rolesList = res.data
       this.setRoleDialogVisible = true

@@ -255,7 +255,6 @@ export default {
     // 显示商品修改框
     async showEditDialogVisible(goodsId) {
       this.editDialogVisible = true
-      console.log(goodsId)
       const { data: res } = await this.$http.get(`goods/${goodsId}`)
       if (res.meta.status !== 200) {
         return this.$message.error('查询商品信息失败')

@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../components/Login.vue'
-import Home from '../components/Home.vue'
-import Welcome from '../components/Welcome.vue'
-import Users from '../components/uesr/Users.vue'
-import Rights from '../components/power/Rights.vue'
-import Role from '../components/power/Role.vue'
-import Cate from '../components/goods/Cate.vue'
-import List from '../components/goods/List.vue'
-import Params from '../components/goods/Params.vue'
-import Add from '../components/goods/Add.vue'
-import Order from '../components/order/Order.vue'
-import Reports from '../components/reports/Reports.vue'
+
+const Order = () => import('../components/order/Order.vue')
+const Reports = () => import('../components/reports/Reports.vue')
+const List = () => import('../components/goods/List.vue')
+const Add = () => import('../components/goods/Add.vue')
+const Cate = () => import('../components/goods/Cate.vue')
+const Params = () => import('../components/goods/Params.vue')
+const Users = () => import('../components/uesr/Users.vue')
+const Rights = () => import('../components/power/Rights.vue')
+const Role = () => import('../components/power/Role.vue')
+const Login = () => import('../components/Login.vue')
+const Home = () => import('../components/Home.vue')
+const Welcome = () => import('../components/Welcome.vue')
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,16 @@ router.beforeEach((to, from, next) => {
   const tokenStr = window.sessionStorage.getItem('token')
   if (!tokenStr) return next('/login')
   next()
+})
+router.onError(error => {
+  const pattern = /Loading chunk (\d)+ failed/g
+  const isChunkLoadFailed = error.message.match(pattern)
+  if (isChunkLoadFailed) {
+    // 用路由的replace方法，并没有相当于F5刷新页面，失败的js文件并没有从新请求，会导致一直尝试replace页面导致死循环，而用 location.reload 方法，相当于触发F5刷新页面，虽然用户体验上来说会有刷新加载察觉，但不会导致页面卡死及死循环，从而曲线救国解决该问题
+    location.reload()
+    // const targetPath = $router.history.pending.fullPath;
+    // $router.replace(targetPath);
+  }
 })
 
 export default router

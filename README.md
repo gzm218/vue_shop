@@ -116,6 +116,9 @@ git branch -r -d branch_remote_name
 - 深拷贝
 - 商品列表如果有修改 图片 介绍 的要求要如何区实现
 - 遇到不同状态的标签的显示要用到 v-if v-else 如果是标签的属性需要动态绑定才是要：xxx="变化的属性"
+- 加载懒路由时不用设置分组 不然会报错
+- 因为 cdn 引入较低版本的 elment 所以级联选择器需要点击
+- 报错 rowKey 是因为版本问题 cdn 的版本和 package.json 里要一致
 
 ### 2 笔记
 
@@ -129,3 +132,14 @@ git branch -r -d branch_remote_name
 - 商品分类引入了 树形表格 多个参数 有的需要用到插槽
 - 定义一个全局全局的过滤器 调用时间函数 返回一个时间格式 方法 psdstart(位数，补全的内容)
 -
+
+### 3 项目优化策略
+
+- 生成打包报告
+- 第三方库启用 CDN
+- Element-UI 组件按需加载
+- 路由懒加载
+- 首页内容定制
+- configureWebpack 和 chinWebpack
+  - configureWebpack 通过操作对象的形式，来修改默认的 webpack 配置
+  - chinWebpack 通过链式编程的形式，来修改没默认的 webpack 配置

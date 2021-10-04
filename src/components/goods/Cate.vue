@@ -277,7 +277,6 @@ export default {
     },
     // 选中项发生变化触发这个函数
     parentCateChange() {
-      console.log(this.selectedKeys)
       // 如果 selectedKeys 数组中的 length 大于0，证明选中的父级分类
       // 反之，就说明没有选中热河父级分类
       if (this.selectedKeys.length > 0) {
@@ -295,7 +294,6 @@ export default {
       }
     },
     addCate() {
-      console.log(this.addCateForm)
       // 预验证
       this.$refs.addCateFormRef.validate(async valid => {
         if (!valid) return
@@ -331,7 +329,6 @@ export default {
     },
     // 修改分类信息
     editCate() {
-      console.log(this.editCateForm)
       this.$refs.editCateFormRef.validate(async valid => {
         if (!valid) return
         // 可以修改觉醒信息的网络请求
